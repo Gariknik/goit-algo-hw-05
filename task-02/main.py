@@ -13,7 +13,7 @@ def generator_numbers(text: str) -> Generator:
     Дійсні числа у тексті вважаються записаними без помилок і чітко відокремлені пробілами з обох боків.
     """
     pattern = r'\d+\.\d+' #складаємо паттерн для отримання дійсних чисел з тексту
-    iterator = map(float,re.findall(pattern, text))
+    iterator = map(float, re.findall(pattern, text))
     yield from iterator
 
         
@@ -28,7 +28,8 @@ def sum_profit(text: str, func: Callable) -> float:
 
 text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів."
 total_income = sum_profit(text, generator_numbers)
+print(total_income)
 try:
     assert f"Загальний дохід: {total_income}" == "Загальний дохід: 1351.46", "Test 1. 1351.46"
 except AssertionError as e:
-    print(f"Не виканан: {e}")
+    print(f"Не виконан: {e}")
