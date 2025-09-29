@@ -1,3 +1,5 @@
+from .exception_handling import input_error
+@input_error
 def parse_input(user_input) -> tuple[str, list[str]]:
     """
     Функція-парсер - яка приймає рядок вводу користувача user_input і розбиває його на слова за допомогою методу split(). 

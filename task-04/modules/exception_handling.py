@@ -9,31 +9,13 @@ from typing import Callable
 def input_error(func: Callable)-> str | list[str]:
     @wraps(func)
     def inner(*args, **kwargs) -> str | list[str]:
-        match func.__name__:
-            case 'add_contact':
-                try:
-                    return func(*args, **kwargs)
-                except ValueError:
-                    return 'Contact added failed. Please enter contact name and phone number. Format command [username] [phone]'
-                except KeyError:
-                    return 'Failed added contact. To replace the contact, use change [username] [phone] or enter another name'
-            case 'change_contact':
-                try:
-                    return func(*args, **kwargs)
-                except ValueError:
-                    return 'Contact changed failed. Please enter contact name and phone number. Format command [username] [phone]'
-                except KeyError:
-                    return 'There is no such contact in your contacts.'
-             
-            case 'show_phone':
-                try:
-                    return func(*args, **kwargs)
-                except KeyError:
-                    return 'There is no such contact in your contacts.' 
-                except IndexError:
-                    return 'Please enter contact name. Format command [username]'                
-            case 'show_all_contact':
-                return func(*args, **kwargs)
-            case _:
-                return "Sorry, I don't process that function."
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            return 'Please enter contact name and phone number. Format command [username] [phone]'
+        except KeyError:
+            return 'Failed operations. There is no such contact in your contacts.'
+        except IndexError:
+            return 'Please enter contact name. Format command [username]' 
+
     return inner
